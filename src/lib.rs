@@ -8,7 +8,10 @@ fn read_input(day: u8) -> String {
     fs::read_to_string(&path).unwrap_or_else(|_| panic!("Failed to read {}", path))
 }
 
-/// Reads the input file and returns lines as a vector of strings.
-pub fn read_lines(day: u8) -> Vec<String> {
-    read_input(day).lines().map(String::from).collect()
+/// Reads the input file and splits by a separator.
+pub fn read_split(day: u8, separator: &str) -> Vec<String> {
+    read_input(day)
+        .split(separator)
+        .map(String::from)
+        .collect()
 }

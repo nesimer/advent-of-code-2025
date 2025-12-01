@@ -1,4 +1,4 @@
-use advent_of_code_2025::read_lines;
+use advent_of_code_2025::read_split;
 use std::time::Instant;
 
 const DIAL_SIZE: i32 = 100;
@@ -59,7 +59,7 @@ fn part2(input: &[String]) -> u64 {
 }
 
 fn main() {
-    let input = read_lines(1);
+    let input = read_split(1, "\n");
     
     println!("Day 01 Results: ⭐⭐");
     
