@@ -38,8 +38,20 @@ fn part2(input: &[String]) -> u64 {
         let distance: i32 = distance_str.parse().unwrap();
 
         let distance_to_zero = match direction {
-            "L" => if position == 0 { DIAL_SIZE } else { position },
-            "R" => if position == 0 { DIAL_SIZE } else { DIAL_SIZE - position },
+            "L" => {
+                if position == 0 {
+                    DIAL_SIZE
+                } else {
+                    position
+                }
+            }
+            "R" => {
+                if position == 0 {
+                    DIAL_SIZE
+                } else {
+                    DIAL_SIZE - position
+                }
+            }
             _ => panic!("Invalid direction: {}", direction),
         };
 
@@ -60,20 +72,24 @@ fn part2(input: &[String]) -> u64 {
 
 fn main() {
     let input = read_split(1, "\n");
-    
+
     println!("Day 01 Results: ⭐⭐");
-    
+
     let start = Instant::now();
     let result1 = part1(&input);
     let duration1 = start.elapsed();
     println!("Part 1: {} (took {:?})", result1, duration1);
-    
+
     let start = Instant::now();
     let result2 = part2(&input);
     let duration2 = start.elapsed();
     println!("Part 2: {} (took {:?})", result2, duration2);
-    
+
     println!("Total: {:?}", duration1 + duration2);
+
+    println!("\n--- Résumé des solutions ---");
+    println!("Part 1: Compter les fois où le cadran s'arrête exactement sur 0");
+    println!("Part 2: Compter les fois où le cadran traverse 0 pendant les mouvements");
 }
 
 #[cfg(test)]
