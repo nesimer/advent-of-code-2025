@@ -63,6 +63,10 @@ fn main() {
     println!("Part 2: {} (took {:?})", result2, duration2);
 
     println!("Total: {:?}", duration1 + duration2);
+
+    println!("\n--- Résumé des solutions ---");
+    println!("Part 1: Max joltage avec 2 digits (garder le meilleur préfixe en O(n))");
+    println!("Part 2: Max joltage avec 12 digits (même algo)");
 }
 
 #[cfg(test)]
