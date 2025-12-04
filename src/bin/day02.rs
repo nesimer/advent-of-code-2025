@@ -5,11 +5,11 @@ use std::time::Instant;
 fn has_equal_parts(n: u64) -> bool {
     let digits = n.to_string();
     let len = digits.len();
-    
+
     if len % 2 != 0 {
         return false;
     }
-    
+
     let mid = len / 2;
     digits[..mid] == digits[mid..]
 }
@@ -18,23 +18,23 @@ fn has_equal_parts(n: u64) -> bool {
 fn has_repeating_pattern(n: u64) -> bool {
     let digits = n.to_string();
     let len = digits.len();
-    
+
     for pattern_size in 1..=len / 2 {
         if len % pattern_size != 0 {
             continue;
         }
-        
+
         let repeat_count = len / pattern_size;
         if repeat_count < 2 {
             continue;
         }
-        
+
         let pattern = &digits[..pattern_size];
         if pattern.repeat(repeat_count) == digits {
             return true;
         }
     }
-    
+
     false
 }
 
@@ -50,11 +50,11 @@ where
             if range.is_empty() {
                 return None;
             }
-            
+
             let (start, end) = range.split_once('-')?;
             let start: u64 = start.parse().ok()?;
             let end: u64 = end.parse().ok()?;
-            
+
             Some((start..=end).filter(|&n| validator(n)).sum::<u64>())
         })
         .sum()
@@ -70,20 +70,24 @@ fn part2(input: &[String]) -> u64 {
 
 fn main() {
     let input = read_split(2, ",");
-    
+
     println!("Day 02 Results: ⭐⭐");
-    
+
     let start = Instant::now();
     let result1 = part1(&input);
     let duration1 = start.elapsed();
     println!("Part 1: {} (took {:?})", result1, duration1);
-    
+
     let start = Instant::now();
     let result2 = part2(&input);
     let duration2 = start.elapsed();
     println!("Part 2: {} (took {:?})", result2, duration2);
-    
+
     println!("Total: {:?}", duration1 + duration2);
+
+    println!("\n--- Résumé des solutions ---");
+    println!("Part 1: Somme des nombres avec deux moitiés identiques (ex: 1212 -> 12|12)");
+    println!("Part 2: Somme des nombres avec un motif répété au moins 2 fois (ex: 123123)");
 }
 
 #[cfg(test)]
