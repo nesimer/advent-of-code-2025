@@ -42,7 +42,7 @@ Copy `src/bin/day01.rs` to `src/bin/dayXX.rs` and create `inputs/dayXX.txt` 🎁
 - [X] Day 06 ⭐⭐
 - [X] Day 07 ⭐⭐
 - [x] Day 08 ⭐⭐
-- [ ] Day 09 🎁
+- [x] Day 09 ⭐⭐
 - [ ] Day 10 🎁
 - [ ] Day 11 🎁
 - [ ] Day 12 🎁
