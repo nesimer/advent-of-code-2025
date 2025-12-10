@@ -43,7 +43,7 @@ Copy `src/bin/day01.rs` to `src/bin/dayXX.rs` and create `inputs/dayXX.txt` 🎁
 - [X] Day 07 ⭐⭐
 - [x] Day 08 ⭐⭐
 - [x] Day 09 ⭐⭐
-- [ ] Day 10 🎁
+- [X] Day 10 ⭐⭐
 - [ ] Day 11 🎁
 - [ ] Day 12 🎁
 
@@ -60,8 +60,9 @@ Copy `src/bin/day01.rs` to `src/bin/dayXX.rs` and create `inputs/dayXX.txt` 🎁
 | 07 | 61µs | 61µs | **61µs** |
 | 08 | 22ms | 20ms | **42ms** |
 | 09 | 279µs | 10ms | **11ms** |
+| 10 | 880µs | x | **880µs** |
 
-**Total: ~192ms**
+**Total: ~193ms**
 
 ---
 
