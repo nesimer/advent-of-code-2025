@@ -60,9 +60,9 @@ Copy `src/bin/day01.rs` to `src/bin/dayXX.rs` and create `inputs/dayXX.txt` 🎁
 | 07 | 61µs | 61µs | **61µs** |
 | 08 | 22ms | 20ms | **42ms** |
 | 09 | 279µs | 10ms | **11ms** |
-| 10 | 880µs | x | **880µs** |
+| 10 | 880µs | 98ms | **880µs** |
 
-**Total: ~193ms**
+**Total: ~291ms**
 
 ---
 
