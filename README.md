@@ -47,6 +47,8 @@ Copy `src/bin/day01.rs` to `src/bin/dayXX.rs` and create `inputs/dayXX.txt` 🎁
 - [x] Day 11 ⭐⭐
 - [X] Day 12 ⭐⭐
 
+🎄
+
 ## ⏱️ Benchmarks (Release Mode)
 
 | Day | Part 1 | Part 2 | Total |
@@ -62,7 +64,7 @@ Copy `src/bin/day01.rs` to `src/bin/dayXX.rs` and create `inputs/dayXX.txt` 🎁
 | 09 | 279µs | 10ms | **11ms** |
 | 10 | 880µs | 98ms | **99ms** |
 | 11 | 147µs | 366µs | **513µs** |
-| 12 | X | X | **X** |
+| 12 | 91µs | 0µs | **91µs** |
 
 => **Total: 292ms**
 
