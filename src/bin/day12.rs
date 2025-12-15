@@ -3,51 +3,40 @@ use std::time::Instant;
 
 /// Parses input into shape areas and regions (width, height, counts per shape).
 fn parse_input(input: &[String]) -> (Vec<u64>, Vec<(u64, u64, Vec<u64>)>) {
-    let mut shape_areas: Vec<u64> = Vec::new();
-    let mut regions: Vec<(u64, u64, Vec<u64>)> = Vec::new();
-    let mut i = 0;
+    let mut shape_areas = Vec::new();
+    let mut regions = Vec::new();
 
-    // Parse shapes (format: "index:" followed by grid lines)
-    while i < input.len() {
-        let line = input[i].trim();
-        if line.is_empty() {
-            i += 1;
+    for chunk in input.split(|line| line.trim().is_empty()) {
+        if chunk.is_empty() {
             continue;
         }
 
-        // Check if it's a shape definition (e.g., "0:")
-        if let Some(idx_str) = line.strip_suffix(':') {
-            if idx_str.parse::<usize>().is_ok() {
-                i += 1;
-                let mut area = 0u64;
-
-                // Count '#' characters in the shape grid
-                while i < input.len() && !input[i].trim().is_empty() {
-                    area += input[i].chars().filter(|&c| c == '#').count() as u64;
-                    i += 1;
-                }
+        // Check for shape definition (e.g., "0:")
+        if let Some(header) = chunk[0].trim().strip_suffix(':') {
+            if header.parse::<usize>().is_ok() {
+                let area: u64 = chunk[1..]
+                    .iter()
+                    .map(|line| line.chars().filter(|&c| c == '#').count() as u64)
+                    .sum();
                 shape_areas.push(area);
                 continue;
             }
         }
 
-        // Check if it's a region definition (e.g., "4x4: 0 0 0 0 2 0")
-        if let Some(colon_pos) = line.find(':') {
-            let dims = &line[..colon_pos];
-            if let Some(x_pos) = dims.find('x') {
-                if let (Ok(w), Ok(h)) = (
-                    dims[..x_pos].parse::<u64>(),
-                    dims[x_pos + 1..].parse::<u64>(),
-                ) {
-                    let counts: Vec<u64> = line[colon_pos + 1..]
-                        .split_whitespace()
-                        .filter_map(|s| s.parse().ok())
-                        .collect();
-                    regions.push((w, h, counts));
+        // Parse regions in the chunk
+        for line in chunk {
+            if let Some((dims, counts_str)) = line.split_once(':') {
+                if let Some((w, h)) = dims.split_once('x') {
+                    if let (Ok(w), Ok(h)) = (w.parse::<u64>(), h.parse::<u64>()) {
+                        let counts: Vec<u64> = counts_str
+                            .split_whitespace()
+                            .filter_map(|s| s.parse().ok())
+                            .collect();
+                        regions.push((w, h, counts));
+                    }
                 }
             }
         }
-        i += 1;
     }
 
     (shape_areas, regions)
@@ -56,19 +45,22 @@ fn parse_input(input: &[String]) -> (Vec<u64>, Vec<(u64, u64, Vec<u64>)>) {
 /// Counts regions where the total area of presents fits in the region.
 fn part1(input: &[String]) -> u64 {
     let (shape_areas, regions) = parse_input(input);
+    let mut count = 0;
 
-    regions
-        .iter()
-        .filter(|(w, h, counts)| {
-            let region_area = w * h;
-            let present_area: u64 = counts
-                .iter()
-                .zip(shape_areas.iter())
-                .map(|(&count, &area)| count * area)
-                .sum();
-            present_area <= region_area
-        })
-        .count() as u64
+    for (w, h, counts) in regions {
+        let region_area = w * h;
+        let mut present_area = 0;
+
+        for (i, &c) in counts.iter().enumerate() {
+            present_area += c * shape_areas[i];
+        }
+
+        if present_area <= region_area {
+            count += 1;
+        }
+    }
+
+    count
 }
 
 fn main() {
@@ -84,7 +76,7 @@ fn main() {
     println!("Total: {:?}", duration1);
 
     println!("\n--- Résumé des solutions ---");
-    println!("Part 1: ");
+    println!("Part 1: Compter les régions où la surface totale des cadeaux tient dans la région");
 }
 
 #[cfg(test)]
